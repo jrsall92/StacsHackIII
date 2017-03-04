@@ -1,12 +1,6 @@
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.Font;
-import java.awt.image.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by irs6 on 04/03/17.
@@ -39,6 +33,11 @@ public class Screen extends JPanel implements Runnable, KeyListener {
 
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setFocusable(true);
+        setBackground(Color.BLACK);
+        Rectangle r = new Rectangle(300, 350, 10, 10, true, Color.RED);
+        //Rectangle r2 = new Rectangle(300,350,5,5);
+        add(r);
+
         requestFocus();
     }
 
@@ -106,6 +105,14 @@ public class Screen extends JPanel implements Runnable, KeyListener {
 
         //player.loadPlayerTile("player.png");
 
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        Component[] components =getComponents();
+        for(Component c : components){
+            c.paint(g);
+        }
     }
 
     @Override
