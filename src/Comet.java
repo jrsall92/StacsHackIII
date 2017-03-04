@@ -19,7 +19,6 @@ public class Comet {
         this.parent = p;
         init();
         setImage(imgNum);
-
     }
 
     private void setImage(int n){
@@ -59,6 +58,14 @@ public class Comet {
 
     public int getHeight() {
         return height;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
     }
 
     void show(){
