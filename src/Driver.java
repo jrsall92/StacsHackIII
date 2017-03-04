@@ -16,12 +16,12 @@ public class Driver extends PApplet {
 
     public void settings(){
         size(640, 900);
-        for(int i = 0; i< NUMBER_OF_STARS; i++){
-            stars[i] = new StarP(this);
-        }
     }
 
     public void setup(){
+        for(int i = 0; i< NUMBER_OF_STARS; i++){
+            stars[i] = new StarP(this);
+        }
         moveLeft = false;
         moveRight = false;
         moveUp = false;

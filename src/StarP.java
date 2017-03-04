@@ -23,7 +23,7 @@ public class StarP {
         y = y + yspeed;
 
         if (y > parent.height) {
-            y = parent.random(-200, -100);
+            y = parent.random(-200, parent.height);
         }
     }
 
