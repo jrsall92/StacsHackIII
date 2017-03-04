@@ -6,8 +6,7 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args){
-        System.out.println("hi");
-        JFrame window = new JFrame("Hunt The Wumpus");
+        JFrame window = new JFrame("Return of the Arcades");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setContentPane(new Screen());
         window.pack();
