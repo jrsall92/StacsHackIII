@@ -5,6 +5,7 @@ import processing.core.PApplet;
  */
 public class Driver extends PApplet {
 
+    Player pl;
 
     private final int NUMBER_OF_STARS = 500;
     private final int NUMBER_OF_COMETS = 5;
@@ -36,6 +37,8 @@ public class Driver extends PApplet {
         moveRight = false;
         moveUp = false;
         moveDown = false;
+
+        pl = new Player(this);
     }
 
     public void draw(){
@@ -48,11 +51,17 @@ public class Driver extends PApplet {
             comets[i].move();
             comets[i].show();
         }
+
+
+        pl.show();
+
     }
 
     public void keyPressed(){
+
+
         if(key == CODED){
-            if(key == UP){
+            if(keyCode == UP){
                 moveUp = true;
                 //TODO move player up
             }
@@ -60,7 +69,7 @@ public class Driver extends PApplet {
                 moveUp = false;
             }
 
-            if(key == DOWN){
+            if(keyCode == DOWN){
                 moveDown = true;
                 //TODO move player down
             }
@@ -68,22 +77,26 @@ public class Driver extends PApplet {
                 moveDown = false;
             }
 
-            if(key == RIGHT){
+            if(keyCode == RIGHT){
                 moveRight = true;
+                pl.move(20);
                 //TODO move right
             }
             else{
                 moveRight = false;
             }
 
-            if(key == LEFT){
+            if(keyCode == LEFT){
                 moveLeft = true;
+                pl.move(-20);
                 //TODO move right
             }
             else{
                 moveLeft = false;
             }
         }
+
+
         else{
             if(key == ' '){
                 System.out.println("Space");

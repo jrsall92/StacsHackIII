@@ -12,5 +12,12 @@ public class GridTiles {
     public int[][] grid = new int[gridHeight][gridWidth];
 
 
+    /*public static GridTiles fillGrid(int[][] grid, int x, int y){
+
+        grid[x][y]=
+
+       // return gridTiles;
+    }*/
+
 
 }

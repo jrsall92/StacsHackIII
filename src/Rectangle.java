@@ -9,6 +9,9 @@ public class Rectangle extends Component {
     boolean filled;
     Color color;
 
+    public Rectangle() {
+    }
+
     public Rectangle(int x, int y, int w, int h, boolean filled, Color color) {
         this.x = x;
         this.y = y;
