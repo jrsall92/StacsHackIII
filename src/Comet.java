@@ -13,11 +13,22 @@ public class Comet {
     private PImage image;
     private float random;
     private int imgNum;
+    private int width, height;
 
     public Comet(PApplet p){
         this.parent = p;
         init();
-        image = parent.loadImage("boulder"+ imgNum +".png");
+        setImage(imgNum);
+
+    }
+
+    private void setImage(int n){
+        if(n<1 || n>3){
+            n = 0;
+        }
+        image = parent.loadImage("boulder"+ n +".png");
+        width = image.width;
+        height = image.height;
     }
 
     void hit(){
@@ -25,12 +36,11 @@ public class Comet {
         if(imgNum > 3){
             init();
         }
-        image = parent.loadImage("boulder"+ imgNum +".png");
+        setImage(imgNum);
     }
 
     void move() {
         y = y + SPEED + (random * 50 * SPEED /100);
-
         if (y > parent.height) {
             init();
         }
@@ -41,6 +51,14 @@ public class Comet {
         y  = parent.random(-250, -150);
         random = parent.random(-1f, 1f);
         imgNum = 1;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     void show(){
