@@ -7,20 +7,21 @@ public class StarP {
 
     PApplet parent;
 
+    private final int STAR_SIZE = 3;
+    private final float SPEED = 0.75f;
     float x;
     float y;
-    float yspeed;
+
 
     public StarP(PApplet p) {
         parent = p;
         x  = parent.random(parent.width);
         y  = parent.random(-200, parent.height);
-        yspeed  = 0.75f;
 
     }
 
     void move() {
-        y = y + yspeed;
+        y = y + SPEED;
 
         if (y > parent.height) {
             y = parent.random(-200, parent.height);
@@ -29,6 +30,6 @@ public class StarP {
 
     void show() {
         parent.stroke(255, 255, 0);
-        parent.rect(x, y, 3, 3);
+        parent.rect(x, y, STAR_SIZE, STAR_SIZE);
     }
 }
