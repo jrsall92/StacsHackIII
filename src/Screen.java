@@ -135,6 +135,7 @@ public class Screen extends JPanel implements Runnable, KeyListener {
     public void keyTyped(KeyEvent keyEvent) {
     }
 
+
     @Override
     public void keyPressed(KeyEvent keyEvent) {
     }
