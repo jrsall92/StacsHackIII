@@ -1,31 +1,30 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Created by va29 on 04/03/17.
  */
 public class Enemy {
-    PApplet parent;
+
+    private PApplet parent;
+
+    private final int LEFT_TURN = 1;
+    private final int STRAIGHT = 2;
+    private final int RIGHT_TURN = 3;
 
     private final int ENEMY_SIZE = 60;
     private final float SPEED = 1.4f;
     private float SPEED2 = 1f;
-    private float x;
+    private PImage image;
+    private int width, height;
+    private float x, y;
     private int frames = 0;
     private int direction;
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    private float y;
 
 
     public Enemy(PApplet p) {
         parent = p;
+        setImage(STRAIGHT);
         x  = parent.random((int) (Math.random()*581));
         y  = -60;
     }
@@ -34,18 +33,26 @@ public class Enemy {
         y = y + SPEED;
 
         if (y > parent.height) {
-            y = parent.random(-60, parent.height);
+            init();
         }
 
         if(frames <= 0){
-            frames = (int) (parent.random(120));
+            frames = (int) (parent.random(10,45));
             direction = (int) parent.random(-1.1f, 1.1f);
-            while (direction == 0){
-                direction = (int) parent.random(-1.1f, 1.1f);
-            }
+        }
+
+        if(direction < 0){
+            setImage(LEFT_TURN);
+        }
+        else if (direction > 0){
+            setImage(RIGHT_TURN);
+        }
+        else {
+            setImage(STRAIGHT);
         }
 
         x = x + direction * SPEED2;
+
         frames--;
 
         if(x>parent.width-(ENEMY_SIZE/2))
@@ -55,14 +62,39 @@ public class Enemy {
             x = parent.width- (ENEMY_SIZE/2) -1;
     }
 
-    void show() {
-        parent.stroke(255, 255, 0);
-        parent.rect(x, y, ENEMY_SIZE, ENEMY_SIZE);
-
+    private void init(){
+        x  = parent.random(parent.width);
+        y  = parent.random(-250, -150);
+        setImage(STRAIGHT);
     }
 
+    private void setImage(int n){
+        if(n<1 || n>3){
+            n = 2;
+        }
+        image = parent.loadImage("fighter"+ n +".png");
+        width = image.width;
+        height = image.height;
+    }
 
+    public float getY() {
+        return y;
+    }
 
+    public int getWidth() {
+        return width;
+    }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    void show() {
+        parent.image(image, x, y);
+    }
 
 }

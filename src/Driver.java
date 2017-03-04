@@ -57,9 +57,6 @@ public class Driver extends PApplet {
         pl.show();
         enemy.show();
         enemy.move();
-        if(enemy.getY()>=830)
-            enemy.setY(0);
-
     }
 
     public void keyPressed(){
@@ -108,5 +105,9 @@ public class Driver extends PApplet {
                 comets[3].hit();
             }
         }
+    }
+
+    public void keyReleased(){
+        pl.resetImage();
     }
 }
