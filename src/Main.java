@@ -4,6 +4,10 @@
 public class Main {
 
     public static void main(String[] args){
-        System.out.println("8");
+        JFrame window = new JFrame("Hunt The Wumpus");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setContentPane(new Screen());
+        window.pack();
+        window.setVisible(true);
     }
 }
