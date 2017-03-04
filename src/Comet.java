@@ -14,6 +14,7 @@ public class Comet {
     private float random;
     private int imgNum;
     private int width, height;
+    private int maulCounter;
 
     public Comet(PApplet p){
         this.parent = p;
@@ -32,17 +33,26 @@ public class Comet {
 
     void hit(){
         imgNum++;
-        if(imgNum > 3){
+        if(imgNum > 4){
             init();
         }
-        setImage(imgNum);
+        if(imgNum == 4){
+            image = parent.loadImage("maul.png");
+            x-=42;
+            y-=69;
+        }
+        else {
+            setImage(imgNum);
+        }
     }
 
     void move() {
         y = y + SPEED + (random * 50 * SPEED /100);
-        if (y > parent.height) {
+        if (y > parent.height || maulCounter > 3) {
             init();
         }
+        else if(imgNum == 4)
+            maulCounter++;
     }
 
     private void init(){
@@ -50,6 +60,8 @@ public class Comet {
         y  = parent.random(-250, -150);
         random = parent.random(-1f, 1f);
         imgNum = 1;
+        maulCounter = 0;
+        setImage(imgNum);
     }
 
     public int getWidth() {
