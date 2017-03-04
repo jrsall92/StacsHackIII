@@ -8,8 +8,10 @@ public class Enemy {
 
     private final int ENEMY_SIZE = 60;
     private final float SPEED = 1.4f;
-    private float SPEED2 = 1;
+    private float SPEED2 = 1f;
     private float x;
+    private int frames = 0;
+    private int direction;
 
     public float getY() {
         return y;
@@ -35,14 +37,22 @@ public class Enemy {
             y = parent.random(-60, parent.height);
         }
 
-        if(parent.random(-1, 1)>=0) {
-            SPEED2=1;
-
-        }else{
-            SPEED2=-1;
+        if(frames <= 0){
+            frames = (int) (parent.random(120));
+            direction = (int) parent.random(-1.1f, 1.1f);
+            while (direction == 0){
+                direction = (int) parent.random(-1.1f, 1.1f);
+            }
         }
-        x = x + SPEED2;
 
+        x = x + direction * SPEED2;
+        frames--;
+
+        if(x>parent.width-(ENEMY_SIZE/2))
+            x = -(ENEMY_SIZE/2) + 1;
+
+        if(x <= -(ENEMY_SIZE/2))
+            x = parent.width- (ENEMY_SIZE/2) -1;
     }
 
     void show() {

@@ -15,7 +15,6 @@ public class Player {
     private float x=290;
     private float y=840;
     private PImage image;
-    private int imgNum;
     private int width, height;
 
     public Player(PApplet p){
