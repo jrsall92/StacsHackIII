@@ -12,6 +12,25 @@ import java.io.InputStream;
  * Created by irs6 on 04/03/17.
  */
 public class Screen extends JPanel implements Runnable, KeyListener {
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void run() {
+
+    }
 
     /*public static final int SCREEN_WIDTH = 600;
     public static final int SCREEN_HEIGHT = 700;
