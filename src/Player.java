@@ -66,11 +66,11 @@ public class Player {
         else
             setImage(LEFT_TURN);
 
-        if(x>parent.width)
-            x = 1;
+        if(x>parent.width-(width/2))
+            x = -(width/2) + 1;
 
-        if(x <=0 )
-            x = parent.width -1;
+        if(x <= -(width/2))
+            x = parent.width- (width/2) -1;
     }
 
 }
