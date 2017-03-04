@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by irs6 on 04/03/17.
@@ -10,7 +11,7 @@ public class Screen extends JPanel implements Runnable, KeyListener {
     public static final int SCREEN_WIDTH = 600;
     public static final int SCREEN_HEIGHT = 700;
 
-    private boolean isRunning;
+    private boolean isRunning,isPressed=false;
 
     private boolean gameStart = false;
     private boolean computer = false;
@@ -33,10 +34,16 @@ public class Screen extends JPanel implements Runnable, KeyListener {
 
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setFocusable(true);
-        setBackground(Color.BLACK);
-        Rectangle r = new Rectangle(300, 350, 10, 10, true, Color.RED);
-        //Rectangle r2 = new Rectangle(300,350,5,5);
-        add(r);
+        Rectangle bg = new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, true, Color.BLACK);
+        Rectangle r2 = new Rectangle(300,350,5,5, true, Color.RED);
+        add(bg);
+        add(r2);
+
+        for(int i = 0; i<100; i++){
+            int x = ThreadLocalRandom.current().nextInt(2, SCREEN_WIDTH + 1);
+            int y = ThreadLocalRandom.current().nextInt(2, SCREEN_HEIGHT + 1);
+            add(new Star(x, y, 3,3, true, Color.YELLOW));
+        }
 
         requestFocus();
     }
@@ -70,6 +77,7 @@ public class Screen extends JPanel implements Runnable, KeyListener {
         long timeUrd;
         long timeWait;
 
+
         while (isRunning) {
             timeStart = System.nanoTime();
 
@@ -78,13 +86,16 @@ public class Screen extends JPanel implements Runnable, KeyListener {
             /*update();
             render();
             draw();*/
+            revalidate();
+            repaint();
 
             timeUrd = (System.nanoTime() - timeStart) / 1000000;
             timeWait = targetTime - timeUrd;
             try {
+
                 Thread.sleep(timeWait);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
 
         }
@@ -109,25 +120,27 @@ public class Screen extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void paintComponent(Graphics g){
-        Component[] components =getComponents();
-        for(Component c : components){
-            c.paint(g);
+        if(true) {
+            Component[] components = getComponents();
+            for(int i = 0; i< components.length; i++){
+                if(components[i] instanceof Star)
+                    ((Star) components[i]).move();
+
+                components[i].paint(g);
+            }
         }
     }
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-
     }
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-
     }
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
-
     }
 
 

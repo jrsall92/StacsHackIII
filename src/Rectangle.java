@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * Created by irs6 on 04/03/17.
  */
-public class Rectangle extends Component{
+public class Rectangle extends Component {
 
     int x,y,w,h;
     boolean filled;
