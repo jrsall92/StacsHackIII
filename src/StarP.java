@@ -9,8 +9,8 @@ public class StarP {
 
     private final int STAR_SIZE = 3;
     private final float SPEED = 0.75f;
-    float x;
-    float y;
+    private float x;
+    private float y;
 
 
     public StarP(PApplet p) {
