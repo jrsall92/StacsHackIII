@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/StacsHackIII#.iml" filepath="$PROJECT_DIR$/StacsHackIII#.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StacsHackIII.iml" filepath="$PROJECT_DIR$/StacsHackIII.iml" />
     </modules>
   </component>
 </project>
