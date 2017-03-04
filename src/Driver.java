@@ -6,6 +6,7 @@ import processing.core.PApplet;
 public class Driver extends PApplet {
 
     Player pl;
+    Enemy enemy;
 
     private final int NUMBER_OF_STARS = 500;
     private final int NUMBER_OF_COMETS = 5;
@@ -39,9 +40,12 @@ public class Driver extends PApplet {
         moveDown = false;
 
         pl = new Player(this);
+        enemy = new Enemy(this);
     }
 
     public void draw(){
+
+
         background(0, 0, 0);
         for (int i = 0; i < NUMBER_OF_STARS; i++) {
             stars[i].move();
@@ -54,6 +58,7 @@ public class Driver extends PApplet {
 
 
         pl.show();
+        enemy.show();
 
     }
 

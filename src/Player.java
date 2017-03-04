@@ -22,6 +22,7 @@ public class Player {
     }
 
     void move(int m){
+
         x=x+m;
 
         if(x>parent.width)
@@ -29,7 +30,7 @@ public class Player {
 
         if(x <=0 )
             x = parent.width -1;
-        System.out.println("aaaaaaaaaaaaa");
+
     }
 
 }
