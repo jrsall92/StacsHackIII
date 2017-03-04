@@ -20,8 +20,8 @@ public class Player {
 
     public Player(PApplet p){
         parent = p;
-        x  = 290;
         setImage(STRAIGHT);
+        x  = parent.width/2 - width/2;
         y  = parent.height - height;
     }
 
