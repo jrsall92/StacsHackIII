@@ -8,7 +8,7 @@ public class Enemy {
 
     private final int ENEMY_SIZE = 60;
     private final float SPEED = 1.4f;
-    private float SPEED2 = 1f;
+    private float SPEED2 = 0.8f;
     private float x;
     private int frames = 0;
     private int direction;
@@ -26,7 +26,7 @@ public class Enemy {
 
     public Enemy(PApplet p) {
         parent = p;
-        x  = parent.random((int) (Math.random()*581));
+        x  = parent.random((int) (80+Math.random()*481));
         y  = -60;
     }
 
@@ -36,9 +36,9 @@ public class Enemy {
         if (y > parent.height) {
             y = parent.random(-60, parent.height);
         }
-
         if(frames <= 0){
             frames = (int) (parent.random(120));
+
             direction = (int) parent.random(-1.1f, 1.1f);
             while (direction == 0){
                 direction = (int) parent.random(-1.1f, 1.1f);
