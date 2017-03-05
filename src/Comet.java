@@ -10,7 +10,7 @@ public class Comet {
 
     private PApplet parent;
     private float x, y;
-    private PImage image;
+    private PImage image1, image2, image3, maul, curr;
     private float random;
     private int imgNum;
     private int width, height;
@@ -18,17 +18,27 @@ public class Comet {
 
     public Comet(PApplet p){
         this.parent = p;
+        image1 = parent.loadImage("boulder"+ 1 +".png");
+        image2 = parent.loadImage("boulder"+ 2 +".png");
+        image3 = parent.loadImage("boulder"+ 3 +".png");
+        maul = parent.loadImage("maul.png");
         init();
         setImage(imgNum);
     }
 
     private void setImage(int n){
-        if(n<1 || n>3){
-            n = 0;
+        if(n<1 || n>3 || n == 1){
+            curr = image1;
         }
-        image = parent.loadImage("boulder"+ n +".png");
-        width = image.width;
-        height = image.height;
+        else if(n==2){
+            curr = image2;
+        }
+        else if(n == 3){
+            curr = image3;
+        }
+
+        width = curr.width;
+        height = curr.height;
     }
 
     void hit(){
@@ -37,7 +47,7 @@ public class Comet {
             init();
         }
         if(imgNum == 4){
-            image = parent.loadImage("maul.png");
+            curr = maul;
             x-=42;
             y-=69;
         }
@@ -81,6 +91,6 @@ public class Comet {
     }
 
     void show(){
-        parent.image(image, x, y);
+        parent.image(curr, x+width, y);
     }
 }

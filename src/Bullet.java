@@ -7,7 +7,7 @@ import processing.core.PImage;
 
 public class Bullet {
 
-    private final float SPEED = 1f;
+    private final float SPEED = 3f;
 
     private PApplet parent;
     private float x, y;
@@ -29,23 +29,27 @@ public class Bullet {
         this.height = bul_image.height;
     }
 
-    private void collision(Comet comet){
-       // show();
-        if ((comet.getY() + comet.getHeight() == y)||(comet.getX()< x && comet.getX()+comet.getWidth() <= x)){
+    public boolean collision(Comet comet){
+        if ((comet.getY() + comet.getHeight() >= y && comet.getY() < y)&&(comet.getX() <= x && comet.getX()+comet.getWidth() > x)){
             comet.hit();
+            return true;
         }
-        //else {
-         //   show();
-        //}
+        return false;
     }
+
+    //public void collision(Enemy enemy){
+    //    if ((enemy.getY() + enemy.getHeight() == y)||(enemy.getX()< x && enemy.getX()+enemy.getWidth() <= x)){
+    //        enemy.hit();
+    //    }
+    //}
 
     void move(){
-        y--;
+        y-=SPEED;
     }
 
-    void show(){
+    void show(int offset){
 
-        parent.image(bul_image, x + 12, y);
+        parent.image(bul_image, x + offset - 6, y);
 
     }
 

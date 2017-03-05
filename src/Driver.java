@@ -59,7 +59,13 @@ public class Driver extends PApplet {
         }
         for (int i = 0; i < bullets.size(); i++){
             bullets.get(i).move();
-            bullets.get(i).show();
+            bullets.get(i).show(pl.getWidth()/2);
+            for(int j =0; j< NUMBER_OF_COMETS; j++){
+                if(bullets.get(i).collision(comets[j])) {
+                    bullets.remove(i);
+                    break;
+                }
+            }
         }
 
         pl.show();
@@ -68,8 +74,6 @@ public class Driver extends PApplet {
     }
 
     public void keyPressed(){
-
-
         if(key == CODED){
             if(keyCode == UP){
                 moveUp = true;
@@ -105,12 +109,10 @@ public class Driver extends PApplet {
                 moveLeft = false;
             }
         }
-
-
         else{
             if(key == ' '){
                 System.out.println("Space");
-                comets[3].hit();
+                //comets[3].hit();
                 bullets.add(new Bullet(this, pl.getX(), pl.getY()));
             }
         }
