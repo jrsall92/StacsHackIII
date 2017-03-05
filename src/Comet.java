@@ -13,15 +13,23 @@ public class Comet {
     private PImage image1, image2, image3, maul, curr;
     private float random;
     private int imgNum;
-    private int width, height;
+    private int width1, height1, width2, height2, width3, height3, maulWidth, maulHeight, currWidth, currHeight;
     private int maulCounter;
 
     public Comet(PApplet p){
         this.parent = p;
         image1 = parent.loadImage("boulder"+ 1 +".png");
+        width1 = image1.width;
+        height1 = image1.height;
         image2 = parent.loadImage("boulder"+ 2 +".png");
+        width2 = image2.width;
+        height2 = image2.height;
         image3 = parent.loadImage("boulder"+ 3 +".png");
+        width3 = image3.width;
+        height3 = image3.height;
         maul = parent.loadImage("maul.png");
+        maulWidth=maul.width;
+        maulHeight=maul.height;
         init();
         setImage(imgNum);
     }
@@ -29,16 +37,19 @@ public class Comet {
     private void setImage(int n){
         if(n<1 || n>3 || n == 1){
             curr = image1;
+            currWidth = width1;
+            currHeight = height1;
         }
         else if(n==2){
             curr = image2;
+            currWidth = width2;
+            currHeight = height2;
         }
         else if(n == 3){
             curr = image3;
+            currWidth = width3;
+            currHeight = height3;
         }
-
-        width = curr.width;
-        height = curr.height;
     }
 
     void hit(){
@@ -48,6 +59,8 @@ public class Comet {
         }
         if(imgNum == 4){
             curr = maul;
+            currHeight = maulHeight;
+            currWidth = maulWidth;
             x-=42;
             y-=69;
         }
@@ -75,11 +88,11 @@ public class Comet {
     }
 
     public int getWidth() {
-        return width;
+        return currWidth;
     }
 
     public int getHeight() {
-        return height;
+        return currHeight;
     }
 
     public float getX() {
@@ -91,6 +104,6 @@ public class Comet {
     }
 
     void show(){
-        parent.image(curr, x+width, y);
+        parent.image(curr, x, y);
     }
 }
