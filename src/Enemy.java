@@ -97,4 +97,9 @@ public class Enemy {
         parent.image(image, x, y);
     }
 
+    public void reset(){
+        y = -100;
+        x = parent.random(parent.width);
+    }
+
 }
