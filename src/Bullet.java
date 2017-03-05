@@ -30,21 +30,12 @@ public class Bullet {
     }
 
     public boolean collision(Comet comet){
-        if ((comet.getY() + comet.getHeight() >= y && comet.getY() < y)&&(comet.getX() <= x+80
-                && comet.getX()+comet.getWidth()-50 > x)){
+        if ((comet.getY() + comet.getHeight() >= y && comet.getY() < y)&&(comet.getX() <= x && comet.getX()+comet.getWidth() > x)){
             comet.hit();
             return true;
         }
         return false;
     }
-   /* public boolean gameOver(Player player, Comet comet){
-        if (player.getY() <= comet.getY()+comet.getHeight() && player.getX()<=comet.getX()+comet.getWidth()-60
-                && player.getX()+60>comet.getX()){
-            return true;
-        }else{
-            return false;
-        }
-    }*/
 
     //public void collision(Enemy enemy){
     //    if ((enemy.getY() + enemy.getHeight() == y)||(enemy.getX()< x && enemy.getX()+enemy.getWidth() <= x)){

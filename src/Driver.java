@@ -1,9 +1,9 @@
+
 import processing.core.PApplet;
-import processing.core.PImage;
 
 import java.util.ArrayList;
 
-import java.util.concurrent.TimeUnit;
+import static java.lang.Thread.sleep;
 
 /**
  * Created by irs6 on 04/03/17.
@@ -12,6 +12,8 @@ public class Driver extends PApplet {
 
     Player pl;
     Enemy enemy;
+    //PApplet p;
+    int k=0;
 
     private final int NUMBER_OF_STARS = 500;
     private final int NUMBER_OF_COMETS = 5;
@@ -19,6 +21,9 @@ public class Driver extends PApplet {
     private final int SCREEN_HEIGHT = 900;
 
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    private ArrayList<BulletEnemy> bulletsEnemy = new ArrayList<>();
+
+
 
     private boolean moveLeft, moveRight, moveUp, moveDown;
 
@@ -28,9 +33,6 @@ public class Driver extends PApplet {
 
     private StarP[] stars = new StarP[NUMBER_OF_STARS];
     private Comet[] comets = new Comet[NUMBER_OF_COMETS];
-
-    private PImage theEnd;
-    //theEnd = loadImage("gameover2.png");
 
     public void settings(){
         size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -59,12 +61,12 @@ public class Driver extends PApplet {
             stars[i].move();
             stars[i].show();
         }
-        for(int i = 0; i < NUMBER_OF_COMETS; i++){
+        for(int i = 0; i < NUMBER_OF_COMETS; i++) {
             comets[i].move();
             comets[i].show();
             if ((comets[i].getY() + comets[i].getHeight() >= pl.getY() && comets[i].getY() < pl.getY())
-                    &&(comets[i].getX() <= pl.getX()+80
-                    && comets[i].getX()+comets[i].getWidth()-50 > pl.getX())){
+                    && (comets[i].getX() <= pl.getX() + 80
+                    && comets[i].getX() + comets[i].getWidth() - 50 > pl.getX())) {
                 //comets[i].hit();
                 //image(loadImage("gameover2.png"),200,200);
                 //theEnd = loadImage("gameover2.png");
@@ -72,31 +74,42 @@ public class Driver extends PApplet {
                 //TimeUnit.MINUTES.sleep(1);
                 try {
                     Thread.sleep(1000000000);
-                } catch(InterruptedException ex) {
+                } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
             }
-
-            /*if(gameOver(pl,comets[i])){
-                image(loadImage("gameover.png"),320,450);
-                break;
-            }*/
         }
-
-
-
         for (int i = 0; i < bullets.size(); i++){
+
             bullets.get(i).move();
             bullets.get(i).show(pl.getWidth()/2);
             for(int j =0; j< NUMBER_OF_COMETS; j++){
-
-
-
                 if(bullets.get(i).collision(comets[j])) {
                     bullets.remove(i);
                     break;
                 }
             }
+        }
+
+
+        if(k%120==0) {
+            bulletsEnemy.add(new BulletEnemy(this, enemy.getX(), enemy.getY()));
+        }
+        k++;
+
+
+        for (int i = 0; i < bulletsEnemy.size(); i++){
+
+            bulletsEnemy.get(i).move();
+            //  bulletsEnemy.get(i).show(enemy.getWidth()/2);
+            //bulletsEnemy.add(new BulletEnemy(this, enemy.getX()+200, enemy.getY()-200));
+            bulletsEnemy.get(i).show(enemy.getWidth()/2);
+           /* for(int j =0; j< NUMBER_OF_COMETS; j++){
+                if(bullets.get(i).collision(comets[j])) {
+                    bullets.remove(i);
+                    break;
+                }
+            }*/
         }
 
         pl.show();
@@ -145,6 +158,7 @@ public class Driver extends PApplet {
                 System.out.println("Space");
                 //comets[3].hit();
                 bullets.add(new Bullet(this, pl.getX(), pl.getY()));
+                //   bulletsEnemy.add(new BulletEnemy(this, enemy.getX(), enemy.getY()));
             }
         }
     }
@@ -153,3 +167,4 @@ public class Driver extends PApplet {
         pl.resetImage();
     }
 }
+

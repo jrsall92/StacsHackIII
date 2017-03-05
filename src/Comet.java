@@ -9,7 +9,16 @@ public class Comet {
     private final float SPEED = 2f;
 
     private PApplet parent;
-    private float x, y;
+    private float x;
+
+    public void setX(float x) {
+        this.x=x;
+    }
+    public void setY(float y) {
+        this.y=y;
+    }
+
+    private float y;
     private PImage image1, image2, image3, maul, curr;
     private float random;
     private int imgNum;
@@ -39,11 +48,16 @@ public class Comet {
             curr = image1;
             currWidth = width1;
             currHeight = height1;
+
         }
         else if(n==2){
             curr = image2;
             currWidth = width2;
             currHeight = height2;
+           // x=x+100;
+            //curr.setX(x+100);
+
+            //y=y+100;
         }
         else if(n == 3){
             curr = image3;
@@ -65,6 +79,9 @@ public class Comet {
             y-=69;
         }
         else {
+
+           // x=x+100;
+            //y=y+100;
             setImage(imgNum);
         }
     }
