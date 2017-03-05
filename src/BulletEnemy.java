@@ -42,8 +42,7 @@ public class BulletEnemy {
     }
 
     public boolean collision2(Player player) {
-
-        if ((player.getY() + player.getHeight() >= y /*&& comet.getY() < y*/) && (player.getX() <= x && player.getX() + player.getWidth() > x)) {
+        if ((player.getY() + player.getHeight() <= y) && (player.getX() <= x && player.getX() + player.getWidth() > x)) {
             transparent = true;
             return true;
         }

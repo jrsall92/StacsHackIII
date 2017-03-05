@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PFont;
 
 import java.util.ArrayList;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Driver extends PApplet {
 
+    PFont f;
     Player pl;
     Enemy enemy;
     //PApplet p;
@@ -50,6 +52,9 @@ public class Driver extends PApplet {
 
         pl = new Player(this);
         enemy = new Enemy(this);
+
+        f = createFont("Arial", 16, true);
+
     }
 
     public void draw() {
@@ -63,10 +68,9 @@ public class Driver extends PApplet {
             comets[i].show();
             if ((comets[i].getY() + comets[i].getHeight() >= pl.getY() && comets[i].getY() < pl.getY()) && (comets[i].getX() <= pl.getX() + 80
                     && comets[i].getX() + comets[i].getWidth() - 50 > pl.getX())) {
-                //comets[i].hit();
-               // PApplet.image(loadImage("gameover2.png"),200,200);
-                //theEnd = PApplet.loadImage("gameover2.png");
-                //image(theEnd,250,450);
+                textFont(f, 30);
+                fill(255, 0, 0);
+                text("We're the droids they were looking for", 30, SCREEN_HEIGHT / 2);
                 stop();
             }
         }
@@ -79,7 +83,7 @@ public class Driver extends PApplet {
                     break;
                 }
             }
-            if(!bullets.get(i).isTransparent() && !bullets.get(i).isOutOfBounds()){
+            if (!bullets.get(i).isTransparent() && !bullets.get(i).isOutOfBounds()) {
                 newBullets.add(bullets.get(i));
             }
         }
@@ -95,17 +99,19 @@ public class Driver extends PApplet {
         for (int i = 0; i < bulletsEnemy.size(); i++) {
             bulletsEnemy.get(i).move();
             bulletsEnemy.get(i).show(enemy.getWidth() / 2);
-            if(bulletsEnemy.get(i).collision2(pl)){
-                System.out.println("shoot");
-                //stop();
+            if (bulletsEnemy.get(i).collision2(pl)) {
+                textFont(f, 30);
+                fill(255, 0, 0);
+                text("We're the droids they were looking for", 30, SCREEN_HEIGHT / 2);
+                stop();
             }
-            if(!bulletsEnemy.get(i).isTransparent() && !bulletsEnemy.get(i).isOutOfBounds()){
-                newBulletsEnemy.add(bulletsEnemy.get(i));
-            }
+            //if(!bulletsEnemy.get(i).isTransparent() && !bulletsEnemy.get(i).isOutOfBounds()){
+            //    newBulletsEnemy.add(bulletsEnemy.get(i));
+            //}
         }
 
-        bulletsEnemy = newBulletsEnemy;
-        newBullets = new ArrayList<>();
+        //bulletsEnemy = newBulletsEnemy;
+        //newBullets = new ArrayList<>();
 
         pl.show();
         enemy.show();
