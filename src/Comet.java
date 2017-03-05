@@ -6,7 +6,7 @@ import processing.core.PImage;
  */
 public class Comet {
 
-    private final float SPEED = 0.5f;
+    private final float SPEED = 2f;
 
     private PApplet parent;
     private float x, y;
