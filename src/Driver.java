@@ -1,5 +1,7 @@
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 /**
  * Created by irs6 on 04/03/17.
  */
@@ -12,6 +14,8 @@ public class Driver extends PApplet {
     private final int NUMBER_OF_COMETS = 5;
     private final int SCREEN_WIDTH = 640;
     private final int SCREEN_HEIGHT = 900;
+
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
     private boolean moveLeft, moveRight, moveUp, moveDown;
 
@@ -52,6 +56,10 @@ public class Driver extends PApplet {
         for(int i = 0; i < NUMBER_OF_COMETS; i++){
             comets[i].move();
             comets[i].show();
+        }
+        for (int i = 0; i < bullets.size(); i++){
+            bullets.get(i).move();
+            bullets.get(i).show(pl.getWidth()/2);
         }
 
         pl.show();
@@ -103,6 +111,7 @@ public class Driver extends PApplet {
             if(key == ' '){
                 System.out.println("Space");
                 comets[3].hit();
+                bullets.add(new Bullet(this, pl.getX(), pl.getY()));
             }
         }
     }

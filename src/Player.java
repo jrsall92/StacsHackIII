@@ -72,4 +72,6 @@ public class Player {
             x = parent.width- (width/2) -1;
     }
 
+
+
 }
