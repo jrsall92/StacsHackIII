@@ -68,8 +68,8 @@ public class Driver extends PApplet {
                     && (comets[i].getX() <= pl.getX() + 80
                     && comets[i].getX() + comets[i].getWidth() - 50 > pl.getX())) {
                 //comets[i].hit();
-                //image(loadImage("gameover2.png"),200,200);
-                //theEnd = loadImage("gameover2.png");
+               // PApplet.image(loadImage("gameover2.png"),200,200);
+                //theEnd = PApplet.loadImage("gameover2.png");
                 //image(theEnd,250,450);
                 //TimeUnit.MINUTES.sleep(1);
                 try {

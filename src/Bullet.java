@@ -30,7 +30,8 @@ public class Bullet {
     }
 
     public boolean collision(Comet comet){
-        if ((comet.getY() + comet.getHeight() >= y && comet.getY() < y)&&(comet.getX() <= x && comet.getX()+comet.getWidth() > x)){
+        if ((comet.getY() + comet.getHeight() >= y && comet.getY() < y)&&(comet.getX() <= x+50
+                && comet.getX()+comet.getWidth()-30 > x)){
             comet.hit();
             return true;
         }
