@@ -42,6 +42,16 @@ public class Bullet {
         return false;
     }
 
+    public boolean collision(Enemy enemy){
+        if ((enemy.getY() + enemy.getHeight() >= y && enemy.getY() < y)&&(enemy.getX() <= x+50
+                && enemy.getX()+enemy.getWidth()-30 > x)){
+            enemy.reset();
+            transparent = true;
+            return true;
+        }
+        return false;
+    }
+
     void move(){
         y-=SPEED;
         outOfBounds = y < -10;

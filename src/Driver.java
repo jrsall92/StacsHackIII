@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PFont;
+import processing.core.PImage;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class Driver extends PApplet {
     Enemy enemy;
     //PApplet p;
     int k = 0;
+    PImage vader;
 
     private final int NUMBER_OF_STARS = 500;
     private final int NUMBER_OF_COMETS = 5;
@@ -38,6 +40,7 @@ public class Driver extends PApplet {
     }
 
     public void setup() {
+        vader = loadImage("vader.jpg");
         for (int i = 0; i < NUMBER_OF_STARS; i++) {
             stars[i] = new StarP(this);
         }
@@ -70,6 +73,7 @@ public class Driver extends PApplet {
                     && comets[i].getX() + comets[i].getWidth() - 50 > pl.getX())) {
                 textFont(f, 30);
                 fill(255, 0, 0);
+                image(vader, 30, SCREEN_HEIGHT/4);
                 text("We're the droids they were looking for", 30, SCREEN_HEIGHT / 2);
                 stop();
             }
@@ -102,7 +106,8 @@ public class Driver extends PApplet {
             if (bulletsEnemy.get(i).collision2(pl)) {
                 textFont(f, 30);
                 fill(255, 0, 0);
-                text("We're the droids they were looking for", 30, SCREEN_HEIGHT / 2);
+                image(vader, 30, SCREEN_HEIGHT/4);
+                text("We're the droids they were looking for", 30, SCREEN_HEIGHT / 4);
                 stop();
             }
             //if(!bulletsEnemy.get(i).isTransparent() && !bulletsEnemy.get(i).isOutOfBounds()){
