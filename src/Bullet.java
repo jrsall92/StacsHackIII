@@ -12,6 +12,7 @@ public class Bullet {
     private PApplet parent;
     private float x, y;
     private PImage bul_image;
+    private boolean transparent, outOfBounds;
     private float random;
     private int imgNum;
     private int width, height;
@@ -20,6 +21,8 @@ public class Bullet {
         this.parent = p;
         this.x = x;
         this.y = y;
+        transparent = false;
+        outOfBounds = false;
         setImage();
     }
 
@@ -33,19 +36,23 @@ public class Bullet {
         if ((comet.getY() + comet.getHeight() >= y && comet.getY() < y)&&(comet.getX() <= x+50
                 && comet.getX()+comet.getWidth()-30 > x)){
             comet.hit();
+            transparent = true;
             return true;
         }
         return false;
     }
 
-    //public void collision(Enemy enemy){
-    //    if ((enemy.getY() + enemy.getHeight() == y)||(enemy.getX()< x && enemy.getX()+enemy.getWidth() <= x)){
-    //        enemy.hit();
-    //    }
-    //}
-
     void move(){
         y-=SPEED;
+        outOfBounds = y < -10;
+    }
+
+    public boolean isTransparent() {
+        return transparent;
+    }
+
+    public boolean isOutOfBounds() {
+        return outOfBounds;
     }
 
     void show(int offset){

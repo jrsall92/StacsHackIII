@@ -11,13 +11,6 @@ public class Comet {
     private PApplet parent;
     private float x;
 
-    public void setX(float x) {
-        this.x=x;
-    }
-    public void setY(float y) {
-        this.y=y;
-    }
-
     private float y;
     private PImage image1, image2, image3, maul, curr;
     private float random;

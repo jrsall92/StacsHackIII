@@ -1,9 +1,6 @@
-
 import processing.core.PApplet;
 
 import java.util.ArrayList;
-
-import static java.lang.Thread.sleep;
 
 /**
  * Created by irs6 on 04/03/17.
@@ -13,7 +10,7 @@ public class Driver extends PApplet {
     Player pl;
     Enemy enemy;
     //PApplet p;
-    int k=0;
+    int k = 0;
 
     private final int NUMBER_OF_STARS = 500;
     private final int NUMBER_OF_COMETS = 5;
@@ -21,29 +18,29 @@ public class Driver extends PApplet {
     private final int SCREEN_HEIGHT = 900;
 
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    private ArrayList<Bullet> newBullets = new ArrayList<>();
     private ArrayList<BulletEnemy> bulletsEnemy = new ArrayList<>();
-
-
+    private ArrayList<BulletEnemy> newBulletsEnemy = new ArrayList<>();
 
     private boolean moveLeft, moveRight, moveUp, moveDown;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         PApplet.main("Driver");
     }
 
     private StarP[] stars = new StarP[NUMBER_OF_STARS];
     private Comet[] comets = new Comet[NUMBER_OF_COMETS];
 
-    public void settings(){
+    public void settings() {
         size(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
-    public void setup(){
-        for(int i = 0; i< NUMBER_OF_STARS; i++){
+    public void setup() {
+        for (int i = 0; i < NUMBER_OF_STARS; i++) {
             stars[i] = new StarP(this);
         }
 
-        for(int i = 0; i < NUMBER_OF_COMETS; i++){
+        for (int i = 0; i < NUMBER_OF_COMETS; i++) {
             comets[i] = new Comet(this);
         }
         moveLeft = false;
@@ -55,71 +52,69 @@ public class Driver extends PApplet {
         enemy = new Enemy(this);
     }
 
-    public void draw(){
+    public void draw() {
         background(0, 0, 0);
         for (int i = 0; i < NUMBER_OF_STARS; i++) {
             stars[i].move();
             stars[i].show();
         }
-        for(int i = 0; i < NUMBER_OF_COMETS; i++) {
+        for (int i = 0; i < NUMBER_OF_COMETS; i++) {
             comets[i].move();
             comets[i].show();
-            if ((comets[i].getY() + comets[i].getHeight() >= pl.getY() && comets[i].getY() < pl.getY())
-                    && (comets[i].getX() <= pl.getX() + 80
+            if ((comets[i].getY() + comets[i].getHeight() >= pl.getY() && comets[i].getY() < pl.getY()) && (comets[i].getX() <= pl.getX() + 80
                     && comets[i].getX() + comets[i].getWidth() - 50 > pl.getX())) {
                 //comets[i].hit();
                // PApplet.image(loadImage("gameover2.png"),200,200);
                 //theEnd = PApplet.loadImage("gameover2.png");
                 //image(theEnd,250,450);
-                //TimeUnit.MINUTES.sleep(1);
-                try {
-                    Thread.sleep(1000000000);
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
+                stop();
             }
         }
-        for (int i = 0; i < bullets.size(); i++){
 
+        for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).move();
-            bullets.get(i).show(pl.getWidth()/2);
-            for(int j =0; j< NUMBER_OF_COMETS; j++){
-                if(bullets.get(i).collision(comets[j])) {
-                    bullets.remove(i);
+            bullets.get(i).show(pl.getWidth() / 2);
+            for (int j = 0; j < NUMBER_OF_COMETS; j++) {
+                if (bullets.get(i).collision(comets[j])) {
                     break;
                 }
             }
+            if(!bullets.get(i).isTransparent() && !bullets.get(i).isOutOfBounds()){
+                newBullets.add(bullets.get(i));
+            }
         }
 
+        bullets = newBullets;
+        newBullets = new ArrayList<>();
 
-        if(k%120==0) {
+        if (k % 120 == 0) {
             bulletsEnemy.add(new BulletEnemy(this, enemy.getX(), enemy.getY()));
         }
         k++;
 
-
-        for (int i = 0; i < bulletsEnemy.size(); i++){
-
+        for (int i = 0; i < bulletsEnemy.size(); i++) {
             bulletsEnemy.get(i).move();
-            //  bulletsEnemy.get(i).show(enemy.getWidth()/2);
-            //bulletsEnemy.add(new BulletEnemy(this, enemy.getX()+200, enemy.getY()-200));
-            bulletsEnemy.get(i).show(enemy.getWidth()/2);
-           /* for(int j =0; j< NUMBER_OF_COMETS; j++){
-                if(bullets.get(i).collision(comets[j])) {
-                    bullets.remove(i);
-                    break;
-                }
-            }*/
+            bulletsEnemy.get(i).show(enemy.getWidth() / 2);
+            if(bulletsEnemy.get(i).collision2(pl)){
+                System.out.println("shoot");
+                //stop();
+            }
+            if(!bulletsEnemy.get(i).isTransparent() && !bulletsEnemy.get(i).isOutOfBounds()){
+                newBulletsEnemy.add(bulletsEnemy.get(i));
+            }
         }
+
+        bulletsEnemy = newBulletsEnemy;
+        newBullets = new ArrayList<>();
 
         pl.show();
         enemy.show();
         enemy.move();
     }
 
-    public void keyPressed(){
-        if(key == CODED){
-            if(keyCode == UP){
+    public void keyPressed() {
+        if (key == CODED) {
+            if (keyCode == UP) {
                 moveUp = true;
                 //TODO move player up
             }
@@ -127,34 +122,34 @@ public class Driver extends PApplet {
                 moveUp = false;
             }
 
-            if(keyCode == DOWN){
+            if (keyCode == DOWN) {
                 moveDown = true;
                 //TODO move player down
             }
-            else{
+            else {
                 moveDown = false;
             }
 
-            if(keyCode == RIGHT){
+            if (keyCode == RIGHT) {
                 moveRight = true;
                 pl.move(20);
                 //TODO move right
             }
-            else{
+            else {
                 moveRight = false;
             }
 
-            if(keyCode == LEFT){
+            if (keyCode == LEFT) {
                 moveLeft = true;
                 pl.move(-20);
                 //TODO move right
             }
-            else{
+            else {
                 moveLeft = false;
             }
         }
-        else{
-            if(key == ' '){
+        else {
+            if (key == ' ') {
                 System.out.println("Space");
                 //comets[3].hit();
                 bullets.add(new Bullet(this, pl.getX(), pl.getY()));
@@ -163,7 +158,7 @@ public class Driver extends PApplet {
         }
     }
 
-    public void keyReleased(){
+    public void keyReleased() {
         pl.resetImage();
     }
 }

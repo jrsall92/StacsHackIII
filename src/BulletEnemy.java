@@ -8,82 +8,55 @@ public class BulletEnemy {
     /**
      * Created by jevge on 04/03/2017.
      */
-        private final float SPEED = 5f;
+    private final float SPEED = 5f;
 
-        private PApplet parent;
-        private float x, y;
-        private PImage bul_image;
-        private float random;
-        private int imgNum;
-        private int width, height;
+    private PApplet parent;
+    private float x, y;
+    private PImage bul_image;
+    private boolean transparent, outOfBounds;
+    private float random;
+    private int imgNum;
+    private int width, height;
 
-        public BulletEnemy(PApplet p, float x, float y){
-            this.parent = p;
-            this.x = x;
-            this.y = y;
-            setImage();
-        }
+    public BulletEnemy(PApplet p, float x, float y) {
+        this.parent = p;
+        this.x = x;
+        this.y = y;
+        transparent = false;
+        outOfBounds = false;
+        setImage();
+    }
 
-        private void setImage(){
-            bul_image = parent.loadImage("bullet3.png");
-            this.width = bul_image.width;
-            this.height = bul_image.height;
-        }
+    public boolean isTransparent() {
+        return transparent;
+    }
 
-      /*  public boolean collision(Comet comet){
+    public boolean isOutOfBounds() {
+        return outOfBounds;
+    }
 
+    private void setImage() {
+        bul_image = parent.loadImage("bullet3.png");
+        this.width = bul_image.width;
+        this.height = bul_image.height;
+    }
 
+    public boolean collision2(Player player) {
 
-            if ((comet.getY() + comet.getHeight() >= y *//*&& comet.getY() < y*//*)&&
-                    (comet.getX() <= x && comet.getX()+comet.getWidth() > x)){
-                comet.hit();
-
-                //  comet.setX(comet.getX()+50);
-                //  comet.setY(comet.getY()+50);
-
-                // comet.hit();
-                return true;
-            }
-            return false;
-        }*/
-
-        //public void collision(Enemy enemy){
-        //    if ((enemy.getY() + enemy.getHeight() == y)||(enemy.getX()< x && enemy.getX()+enemy.getWidth() <= x)){
-        //        enemy.hit();
-        //    }
-        //}
-
-
-    public boolean collision2(Player player){
-
-        if ((player.getY() + player.getHeight() >= y /*&& comet.getY() < y*/)&&
-                (player.getX() <= x && player.getX()+player.getWidth() > x)){
-            //  comet.setX(comet.getX()+50);
-            //  comet.setY(comet.getY()+50);
-
-            // comet.hit();
+        if ((player.getY() + player.getHeight() >= y /*&& comet.getY() < y*/) && (player.getX() <= x && player.getX() + player.getWidth() > x)) {
+            transparent = true;
             return true;
         }
         return false;
     }
 
-    void move(){
-            y+=SPEED;
-        }
-
-/*
-    void move2(){
-        y+=SPEED;
+    void move() {
+        y += SPEED;
+        outOfBounds = y > parent.height;
     }
-*/
 
-
-        void show(int offset){
-
-            parent.image(bul_image, x + offset - 6, y);
-
-        }
-
-
+    void show(int offset) {
+        parent.image(bul_image, x + offset - 6, y);
+    }
 
 }
