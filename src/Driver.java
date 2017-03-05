@@ -75,7 +75,17 @@ public class Driver extends PApplet {
                 fill(255, 0, 0);
                 image(vader, 30, SCREEN_HEIGHT/4);
                 text("We're the droids they were looking for", 30, SCREEN_HEIGHT / 2);
+                for (int l = 0; l < bulletsEnemy.size(); l++){
+                    bulletsEnemy.remove(l);
+                }
+                for (int l = 0; l < bullets.size(); l++){
+                    bullets.remove(l);
+                }
+
                 stop();
+
+
+
             }
         }
 
@@ -100,7 +110,12 @@ public class Driver extends PApplet {
         }
         k++;
 
-        for (int i = 0; i < bulletsEnemy.size(); i++) {
+
+
+
+
+
+            for (int i = 0; i < bulletsEnemy.size(); i++) {
             bulletsEnemy.get(i).move();
             bulletsEnemy.get(i).show(enemy.getWidth() / 2);
             if (bulletsEnemy.get(i).collision2(pl)) {
